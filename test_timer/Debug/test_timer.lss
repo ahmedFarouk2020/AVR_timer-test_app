@@ -1,0 +1,803 @@
+
+test_timer.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003f0  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  000003f0  00000484  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  00800062  00800062  00000486  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000486  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000c0  00000000  00000000  000004b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000656  00000000  00000000  00000576  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000299  00000000  00000000  00000bcc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000026a  00000000  00000000  00000e65  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000174  00000000  00000000  000010d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002c8  00000000  00000000  00001244  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000798  00000000  00000000  0000150c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000090  00000000  00000000  00001ca4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 c9 01 	jmp	0x392	; 0x392 <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 ef       	ldi	r30, 0xF0	; 240
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 36       	cpi	r26, 0x62	; 98
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a2 e6       	ldi	r26, 0x62	; 98
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a6 36       	cpi	r26, 0x66	; 102
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 81 01 	call	0x302	; 0x302 <main>
+  8a:	0c 94 f6 01 	jmp	0x3ec	; 0x3ec <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <DIO_setPinDirection>:
+#include "DIO_private.h"
+#include "DIO_config.h"
+
+sint8_t DIO_setPinDirection(uint8_t GPIO, uint8_t pin_number, uint8_t direction)
+{
+	switch (GPIO)
+  92:	81 30       	cpi	r24, 0x01	; 1
+  94:	c9 f0       	breq	.+50     	; 0xc8 <DIO_setPinDirection+0x36>
+  96:	28 f0       	brcs	.+10     	; 0xa2 <DIO_setPinDirection+0x10>
+  98:	82 30       	cpi	r24, 0x02	; 2
+  9a:	39 f1       	breq	.+78     	; 0xea <DIO_setPinDirection+0x58>
+  9c:	83 30       	cpi	r24, 0x03	; 3
+  9e:	b1 f1       	breq	.+108    	; 0x10c <DIO_setPinDirection+0x7a>
+  a0:	46 c0       	rjmp	.+140    	; 0x12e <DIO_setPinDirection+0x9c>
+	{
+		case GPIOA:
+			if (pin_number < 7 && direction <= 1) 
+  a2:	67 30       	cpi	r22, 0x07	; 7
+  a4:	08 f0       	brcs	.+2      	; 0xa8 <DIO_setPinDirection+0x16>
+  a6:	45 c0       	rjmp	.+138    	; 0x132 <DIO_setPinDirection+0xa0>
+  a8:	42 30       	cpi	r20, 0x02	; 2
+  aa:	08 f0       	brcs	.+2      	; 0xae <DIO_setPinDirection+0x1c>
+  ac:	44 c0       	rjmp	.+136    	; 0x136 <DIO_setPinDirection+0xa4>
+			{
+				PORTA_DDR |= (direction<< pin_number);
+  ae:	8a b3       	in	r24, 0x1a	; 26
+  b0:	50 e0       	ldi	r21, 0x00	; 0
+  b2:	9a 01       	movw	r18, r20
+  b4:	02 c0       	rjmp	.+4      	; 0xba <DIO_setPinDirection+0x28>
+  b6:	22 0f       	add	r18, r18
+  b8:	33 1f       	adc	r19, r19
+  ba:	6a 95       	dec	r22
+  bc:	e2 f7       	brpl	.-8      	; 0xb6 <DIO_setPinDirection+0x24>
+  be:	b9 01       	movw	r22, r18
+  c0:	68 2b       	or	r22, r24
+  c2:	6a bb       	out	0x1a, r22	; 26
+				return 1; // no errors
+  c4:	81 e0       	ldi	r24, 0x01	; 1
+  c6:	08 95       	ret
+			}
+		return -2; // pin_number or direction are out of range
+
+		case GPIOB:
+			if (pin_number < 7 && direction <= 1) 
+  c8:	67 30       	cpi	r22, 0x07	; 7
+  ca:	b8 f5       	brcc	.+110    	; 0x13a <DIO_setPinDirection+0xa8>
+  cc:	42 30       	cpi	r20, 0x02	; 2
+  ce:	b8 f5       	brcc	.+110    	; 0x13e <DIO_setPinDirection+0xac>
+			{
+				PORTB_DDR |= (direction<< pin_number);
+  d0:	87 b3       	in	r24, 0x17	; 23
+  d2:	50 e0       	ldi	r21, 0x00	; 0
+  d4:	9a 01       	movw	r18, r20
+  d6:	02 c0       	rjmp	.+4      	; 0xdc <DIO_setPinDirection+0x4a>
+  d8:	22 0f       	add	r18, r18
+  da:	33 1f       	adc	r19, r19
+  dc:	6a 95       	dec	r22
+  de:	e2 f7       	brpl	.-8      	; 0xd8 <DIO_setPinDirection+0x46>
+  e0:	b9 01       	movw	r22, r18
+  e2:	68 2b       	or	r22, r24
+  e4:	67 bb       	out	0x17, r22	; 23
+				return 1; // no errors
+  e6:	81 e0       	ldi	r24, 0x01	; 1
+  e8:	08 95       	ret
+			}
+		return -2; // pin_number or direction are out of range
+		
+		case GPIOC:
+			if (pin_number < 7 && direction <= 1) 
+  ea:	67 30       	cpi	r22, 0x07	; 7
+  ec:	50 f5       	brcc	.+84     	; 0x142 <DIO_setPinDirection+0xb0>
+  ee:	42 30       	cpi	r20, 0x02	; 2
+  f0:	50 f5       	brcc	.+84     	; 0x146 <DIO_setPinDirection+0xb4>
+				{
+					PORTA_DDR |= (direction<< pin_number);
+  f2:	8a b3       	in	r24, 0x1a	; 26
+  f4:	50 e0       	ldi	r21, 0x00	; 0
+  f6:	9a 01       	movw	r18, r20
+  f8:	02 c0       	rjmp	.+4      	; 0xfe <DIO_setPinDirection+0x6c>
+  fa:	22 0f       	add	r18, r18
+  fc:	33 1f       	adc	r19, r19
+  fe:	6a 95       	dec	r22
+ 100:	e2 f7       	brpl	.-8      	; 0xfa <DIO_setPinDirection+0x68>
+ 102:	b9 01       	movw	r22, r18
+ 104:	68 2b       	or	r22, r24
+ 106:	6a bb       	out	0x1a, r22	; 26
+					return 1; // no errors
+ 108:	81 e0       	ldi	r24, 0x01	; 1
+ 10a:	08 95       	ret
+				}
+		return -2; // pin_number or direction are out of range
+		
+		case GPIOD:
+		if (pin_number < 7 && direction <= 1) 
+ 10c:	67 30       	cpi	r22, 0x07	; 7
+ 10e:	e8 f4       	brcc	.+58     	; 0x14a <DIO_setPinDirection+0xb8>
+ 110:	42 30       	cpi	r20, 0x02	; 2
+ 112:	e8 f4       	brcc	.+58     	; 0x14e <DIO_setPinDirection+0xbc>
+				{
+					PORTA_DDR |= (direction<< pin_number);
+ 114:	8a b3       	in	r24, 0x1a	; 26
+ 116:	50 e0       	ldi	r21, 0x00	; 0
+ 118:	9a 01       	movw	r18, r20
+ 11a:	02 c0       	rjmp	.+4      	; 0x120 <DIO_setPinDirection+0x8e>
+ 11c:	22 0f       	add	r18, r18
+ 11e:	33 1f       	adc	r19, r19
+ 120:	6a 95       	dec	r22
+ 122:	e2 f7       	brpl	.-8      	; 0x11c <DIO_setPinDirection+0x8a>
+ 124:	b9 01       	movw	r22, r18
+ 126:	68 2b       	or	r22, r24
+ 128:	6a bb       	out	0x1a, r22	; 26
+					return 1; // no errors
+ 12a:	81 e0       	ldi	r24, 0x01	; 1
+ 12c:	08 95       	ret
+				}
+			
+		return -2; // pin_number or direction are out of range
+
+	default: return -1; // GPIO Id isn't defined
+ 12e:	8f ef       	ldi	r24, 0xFF	; 255
+ 130:	08 95       	ret
+			if (pin_number < 7 && direction <= 1) 
+			{
+				PORTA_DDR |= (direction<< pin_number);
+				return 1; // no errors
+			}
+		return -2; // pin_number or direction are out of range
+ 132:	8e ef       	ldi	r24, 0xFE	; 254
+ 134:	08 95       	ret
+ 136:	8e ef       	ldi	r24, 0xFE	; 254
+ 138:	08 95       	ret
+			if (pin_number < 7 && direction <= 1) 
+			{
+				PORTB_DDR |= (direction<< pin_number);
+				return 1; // no errors
+			}
+		return -2; // pin_number or direction are out of range
+ 13a:	8e ef       	ldi	r24, 0xFE	; 254
+ 13c:	08 95       	ret
+ 13e:	8e ef       	ldi	r24, 0xFE	; 254
+ 140:	08 95       	ret
+			if (pin_number < 7 && direction <= 1) 
+				{
+					PORTA_DDR |= (direction<< pin_number);
+					return 1; // no errors
+				}
+		return -2; // pin_number or direction are out of range
+ 142:	8e ef       	ldi	r24, 0xFE	; 254
+ 144:	08 95       	ret
+ 146:	8e ef       	ldi	r24, 0xFE	; 254
+ 148:	08 95       	ret
+				{
+					PORTA_DDR |= (direction<< pin_number);
+					return 1; // no errors
+				}
+			
+		return -2; // pin_number or direction are out of range
+ 14a:	8e ef       	ldi	r24, 0xFE	; 254
+ 14c:	08 95       	ret
+ 14e:	8e ef       	ldi	r24, 0xFE	; 254
+
+	default: return -1; // GPIO Id isn't defined
+	}
+}
+ 150:	08 95       	ret
+
+00000152 <DIO_setPinValue>:
+
+
+sint8_t DIO_setPinValue(uint8_t GPIO, uint8_t pin_number, uint8_t value)
+{
+	switch (GPIO)
+ 152:	81 30       	cpi	r24, 0x01	; 1
+ 154:	41 f1       	breq	.+80     	; 0x1a6 <DIO_setPinValue+0x54>
+ 156:	38 f0       	brcs	.+14     	; 0x166 <DIO_setPinValue+0x14>
+ 158:	82 30       	cpi	r24, 0x02	; 2
+ 15a:	09 f4       	brne	.+2      	; 0x15e <DIO_setPinValue+0xc>
+ 15c:	44 c0       	rjmp	.+136    	; 0x1e6 <DIO_setPinValue+0x94>
+ 15e:	83 30       	cpi	r24, 0x03	; 3
+ 160:	09 f4       	brne	.+2      	; 0x164 <DIO_setPinValue+0x12>
+ 162:	61 c0       	rjmp	.+194    	; 0x226 <DIO_setPinValue+0xd4>
+ 164:	7f c0       	rjmp	.+254    	; 0x264 <DIO_setPinValue+0x112>
+	{
+		case GPIOA:
+		if (pin_number < 7)
+ 166:	67 30       	cpi	r22, 0x07	; 7
+ 168:	08 f0       	brcs	.+2      	; 0x16c <DIO_setPinValue+0x1a>
+ 16a:	7e c0       	rjmp	.+252    	; 0x268 <DIO_setPinValue+0x116>
+		{
+			if (GET_BIT(value, 0) == LOW)
+ 16c:	40 fd       	sbrc	r20, 0
+ 16e:	0e c0       	rjmp	.+28     	; 0x18c <DIO_setPinValue+0x3a>
+			{
+				CLR_BIT(PORTA_DATA, pin_number);
+ 170:	2b b3       	in	r18, 0x1b	; 27
+ 172:	81 e0       	ldi	r24, 0x01	; 1
+ 174:	90 e0       	ldi	r25, 0x00	; 0
+ 176:	ac 01       	movw	r20, r24
+ 178:	02 c0       	rjmp	.+4      	; 0x17e <DIO_setPinValue+0x2c>
+ 17a:	44 0f       	add	r20, r20
+ 17c:	55 1f       	adc	r21, r21
+ 17e:	6a 95       	dec	r22
+ 180:	e2 f7       	brpl	.-8      	; 0x17a <DIO_setPinValue+0x28>
+ 182:	ba 01       	movw	r22, r20
+ 184:	60 95       	com	r22
+ 186:	62 23       	and	r22, r18
+ 188:	6b bb       	out	0x1b, r22	; 27
+ 18a:	08 95       	ret
+			}
+			else
+			{
+				SET_BIT(PORTA_DATA, pin_number);
+ 18c:	2b b3       	in	r18, 0x1b	; 27
+ 18e:	81 e0       	ldi	r24, 0x01	; 1
+ 190:	90 e0       	ldi	r25, 0x00	; 0
+ 192:	ac 01       	movw	r20, r24
+ 194:	02 c0       	rjmp	.+4      	; 0x19a <DIO_setPinValue+0x48>
+ 196:	44 0f       	add	r20, r20
+ 198:	55 1f       	adc	r21, r21
+ 19a:	6a 95       	dec	r22
+ 19c:	e2 f7       	brpl	.-8      	; 0x196 <DIO_setPinValue+0x44>
+ 19e:	ba 01       	movw	r22, r20
+ 1a0:	62 2b       	or	r22, r18
+ 1a2:	6b bb       	out	0x1b, r22	; 27
+ 1a4:	08 95       	ret
+		}
+		return -2; // pin_number is out of range
+
+
+		case GPIOB:
+		if (pin_number < 7)
+ 1a6:	67 30       	cpi	r22, 0x07	; 7
+ 1a8:	08 f0       	brcs	.+2      	; 0x1ac <DIO_setPinValue+0x5a>
+ 1aa:	60 c0       	rjmp	.+192    	; 0x26c <DIO_setPinValue+0x11a>
+		{
+			if (GET_BIT(value, 0) == LOW)
+ 1ac:	40 fd       	sbrc	r20, 0
+ 1ae:	0e c0       	rjmp	.+28     	; 0x1cc <DIO_setPinValue+0x7a>
+			{
+				CLR_BIT(PORTB_DATA, pin_number);
+ 1b0:	28 b3       	in	r18, 0x18	; 24
+ 1b2:	81 e0       	ldi	r24, 0x01	; 1
+ 1b4:	90 e0       	ldi	r25, 0x00	; 0
+ 1b6:	ac 01       	movw	r20, r24
+ 1b8:	02 c0       	rjmp	.+4      	; 0x1be <DIO_setPinValue+0x6c>
+ 1ba:	44 0f       	add	r20, r20
+ 1bc:	55 1f       	adc	r21, r21
+ 1be:	6a 95       	dec	r22
+ 1c0:	e2 f7       	brpl	.-8      	; 0x1ba <DIO_setPinValue+0x68>
+ 1c2:	ba 01       	movw	r22, r20
+ 1c4:	60 95       	com	r22
+ 1c6:	62 23       	and	r22, r18
+ 1c8:	68 bb       	out	0x18, r22	; 24
+ 1ca:	08 95       	ret
+			}
+			else
+			{
+				SET_BIT(PORTB_DATA, pin_number);
+ 1cc:	28 b3       	in	r18, 0x18	; 24
+ 1ce:	81 e0       	ldi	r24, 0x01	; 1
+ 1d0:	90 e0       	ldi	r25, 0x00	; 0
+ 1d2:	ac 01       	movw	r20, r24
+ 1d4:	02 c0       	rjmp	.+4      	; 0x1da <DIO_setPinValue+0x88>
+ 1d6:	44 0f       	add	r20, r20
+ 1d8:	55 1f       	adc	r21, r21
+ 1da:	6a 95       	dec	r22
+ 1dc:	e2 f7       	brpl	.-8      	; 0x1d6 <DIO_setPinValue+0x84>
+ 1de:	ba 01       	movw	r22, r20
+ 1e0:	62 2b       	or	r22, r18
+ 1e2:	68 bb       	out	0x18, r22	; 24
+ 1e4:	08 95       	ret
+		}
+		return -2; // pin_number is out of range
+
+		
+		case GPIOC:
+		if (pin_number < 7)
+ 1e6:	67 30       	cpi	r22, 0x07	; 7
+ 1e8:	08 f0       	brcs	.+2      	; 0x1ec <DIO_setPinValue+0x9a>
+ 1ea:	42 c0       	rjmp	.+132    	; 0x270 <DIO_setPinValue+0x11e>
+		{
+			if (GET_BIT(value, 0) == LOW)
+ 1ec:	40 fd       	sbrc	r20, 0
+ 1ee:	0e c0       	rjmp	.+28     	; 0x20c <DIO_setPinValue+0xba>
+			{
+				CLR_BIT(PORTC_DATA, pin_number);
+ 1f0:	25 b3       	in	r18, 0x15	; 21
+ 1f2:	81 e0       	ldi	r24, 0x01	; 1
+ 1f4:	90 e0       	ldi	r25, 0x00	; 0
+ 1f6:	ac 01       	movw	r20, r24
+ 1f8:	02 c0       	rjmp	.+4      	; 0x1fe <DIO_setPinValue+0xac>
+ 1fa:	44 0f       	add	r20, r20
+ 1fc:	55 1f       	adc	r21, r21
+ 1fe:	6a 95       	dec	r22
+ 200:	e2 f7       	brpl	.-8      	; 0x1fa <DIO_setPinValue+0xa8>
+ 202:	ba 01       	movw	r22, r20
+ 204:	60 95       	com	r22
+ 206:	62 23       	and	r22, r18
+ 208:	65 bb       	out	0x15, r22	; 21
+ 20a:	08 95       	ret
+			}
+			else
+			{
+				SET_BIT(PORTC_DATA, pin_number);
+ 20c:	25 b3       	in	r18, 0x15	; 21
+ 20e:	81 e0       	ldi	r24, 0x01	; 1
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	ac 01       	movw	r20, r24
+ 214:	02 c0       	rjmp	.+4      	; 0x21a <DIO_setPinValue+0xc8>
+ 216:	44 0f       	add	r20, r20
+ 218:	55 1f       	adc	r21, r21
+ 21a:	6a 95       	dec	r22
+ 21c:	e2 f7       	brpl	.-8      	; 0x216 <DIO_setPinValue+0xc4>
+ 21e:	ba 01       	movw	r22, r20
+ 220:	62 2b       	or	r22, r18
+ 222:	65 bb       	out	0x15, r22	; 21
+ 224:	08 95       	ret
+		}
+		return -2; // pin_number is out of range
+
+		
+		case GPIOD:
+		if (pin_number < 7)
+ 226:	67 30       	cpi	r22, 0x07	; 7
+ 228:	28 f5       	brcc	.+74     	; 0x274 <DIO_setPinValue+0x122>
+		{
+			if (GET_BIT(value, 0) == LOW)
+ 22a:	40 fd       	sbrc	r20, 0
+ 22c:	0e c0       	rjmp	.+28     	; 0x24a <DIO_setPinValue+0xf8>
+			{
+				CLR_BIT(PORTD_DATA, pin_number);
+ 22e:	22 b3       	in	r18, 0x12	; 18
+ 230:	81 e0       	ldi	r24, 0x01	; 1
+ 232:	90 e0       	ldi	r25, 0x00	; 0
+ 234:	ac 01       	movw	r20, r24
+ 236:	02 c0       	rjmp	.+4      	; 0x23c <DIO_setPinValue+0xea>
+ 238:	44 0f       	add	r20, r20
+ 23a:	55 1f       	adc	r21, r21
+ 23c:	6a 95       	dec	r22
+ 23e:	e2 f7       	brpl	.-8      	; 0x238 <DIO_setPinValue+0xe6>
+ 240:	ba 01       	movw	r22, r20
+ 242:	60 95       	com	r22
+ 244:	62 23       	and	r22, r18
+ 246:	62 bb       	out	0x12, r22	; 18
+ 248:	08 95       	ret
+			}
+			else
+			{
+				SET_BIT(PORTD_DATA, pin_number);
+ 24a:	22 b3       	in	r18, 0x12	; 18
+ 24c:	81 e0       	ldi	r24, 0x01	; 1
+ 24e:	90 e0       	ldi	r25, 0x00	; 0
+ 250:	ac 01       	movw	r20, r24
+ 252:	02 c0       	rjmp	.+4      	; 0x258 <DIO_setPinValue+0x106>
+ 254:	44 0f       	add	r20, r20
+ 256:	55 1f       	adc	r21, r21
+ 258:	6a 95       	dec	r22
+ 25a:	e2 f7       	brpl	.-8      	; 0x254 <DIO_setPinValue+0x102>
+ 25c:	ba 01       	movw	r22, r20
+ 25e:	62 2b       	or	r22, r18
+ 260:	62 bb       	out	0x12, r22	; 18
+ 262:	08 95       	ret
+			return 1; // no errors
+		}
+		return -2; // pin_number is out of range
+
+
+		default: return -1; // GPIO Id isn't defined
+ 264:	8f ef       	ldi	r24, 0xFF	; 255
+ 266:	08 95       	ret
+			{
+				SET_BIT(PORTA_DATA, pin_number);
+			}
+			return 1; // no errors
+		}
+		return -2; // pin_number is out of range
+ 268:	8e ef       	ldi	r24, 0xFE	; 254
+ 26a:	08 95       	ret
+			{
+				SET_BIT(PORTB_DATA, pin_number);
+			}
+			return 1; // no errors
+		}
+		return -2; // pin_number is out of range
+ 26c:	8e ef       	ldi	r24, 0xFE	; 254
+ 26e:	08 95       	ret
+			{
+				SET_BIT(PORTC_DATA, pin_number);
+			}
+			return 1; // no errors
+		}
+		return -2; // pin_number is out of range
+ 270:	8e ef       	ldi	r24, 0xFE	; 254
+ 272:	08 95       	ret
+			{
+				SET_BIT(PORTD_DATA, pin_number);
+			}
+			return 1; // no errors
+		}
+		return -2; // pin_number is out of range
+ 274:	8e ef       	ldi	r24, 0xFE	; 254
+
+
+		default: return -1; // GPIO Id isn't defined
+	}
+}
+ 276:	08 95       	ret
+
+00000278 <toggle_led>:
+{
+	static uint8_t counter_high = 0;
+	static uint8_t counter_low = 0;
+	static uint8_t led_state = 1;
+	static uint8_t state_turn = 1; // 0-> low   1-> high
+	if (state_turn == 1)
+ 278:	80 91 61 00 	lds	r24, 0x0061
+ 27c:	81 30       	cpi	r24, 0x01	; 1
+ 27e:	01 f5       	brne	.+64     	; 0x2c0 <toggle_led+0x48>
+	{
+		// increment counter 
+		counter_high++;
+ 280:	80 91 63 00 	lds	r24, 0x0063
+ 284:	8f 5f       	subi	r24, 0xFF	; 255
+ 286:	80 93 63 00 	sts	0x0063, r24
+		// check counter value
+		if (counter_high == 2)
+ 28a:	82 30       	cpi	r24, 0x02	; 2
+ 28c:	a1 f4       	brne	.+40     	; 0x2b6 <toggle_led+0x3e>
+		{
+			// toggle led
+			led_state = !led_state;
+ 28e:	41 e0       	ldi	r20, 0x01	; 1
+ 290:	80 91 60 00 	lds	r24, 0x0060
+ 294:	81 11       	cpse	r24, r1
+ 296:	40 e0       	ldi	r20, 0x00	; 0
+ 298:	40 93 60 00 	sts	0x0060, r20
+			DIO_setPinValue(GPIOB, PIN0, led_state);
+ 29c:	60 e0       	ldi	r22, 0x00	; 0
+ 29e:	81 e0       	ldi	r24, 0x01	; 1
+ 2a0:	0e 94 a9 00 	call	0x152	; 0x152 <DIO_setPinValue>
+			// set period for the other state
+			timer_setInterval(224+7);
+ 2a4:	87 ee       	ldi	r24, 0xE7	; 231
+ 2a6:	90 e0       	ldi	r25, 0x00	; 0
+ 2a8:	0e 94 c5 01 	call	0x38a	; 0x38a <timer_setInterval>
+			// reset counter and turn
+			counter_high = 0;
+ 2ac:	10 92 63 00 	sts	0x0063, r1
+			state_turn = 0;
+ 2b0:	10 92 61 00 	sts	0x0061, r1
+			return ;
+ 2b4:	08 95       	ret
+		}
+		// set period
+		timer_setInterval(36);
+ 2b6:	84 e2       	ldi	r24, 0x24	; 36
+ 2b8:	90 e0       	ldi	r25, 0x00	; 0
+ 2ba:	0e 94 c5 01 	call	0x38a	; 0x38a <timer_setInterval>
+ 2be:	08 95       	ret
+	}
+	else
+	{
+		
+		// increment counter
+		counter_low++;
+ 2c0:	80 91 62 00 	lds	r24, 0x0062
+ 2c4:	8f 5f       	subi	r24, 0xFF	; 255
+ 2c6:	80 93 62 00 	sts	0x0062, r24
+		// check counter value
+		if (counter_low == 2)
+ 2ca:	82 30       	cpi	r24, 0x02	; 2
+ 2cc:	a9 f4       	brne	.+42     	; 0x2f8 <toggle_led+0x80>
+		{
+			// toggle led
+			led_state = !led_state;
+ 2ce:	41 e0       	ldi	r20, 0x01	; 1
+ 2d0:	80 91 60 00 	lds	r24, 0x0060
+ 2d4:	81 11       	cpse	r24, r1
+ 2d6:	40 e0       	ldi	r20, 0x00	; 0
+ 2d8:	40 93 60 00 	sts	0x0060, r20
+			DIO_setPinValue(GPIOB, PIN0, led_state);
+ 2dc:	60 e0       	ldi	r22, 0x00	; 0
+ 2de:	81 e0       	ldi	r24, 0x01	; 1
+ 2e0:	0e 94 a9 00 	call	0x152	; 0x152 <DIO_setPinValue>
+			// set period for the other state
+			timer_setInterval(256);
+ 2e4:	80 e0       	ldi	r24, 0x00	; 0
+ 2e6:	91 e0       	ldi	r25, 0x01	; 1
+ 2e8:	0e 94 c5 01 	call	0x38a	; 0x38a <timer_setInterval>
+			// reset counter and turn
+			counter_low = 0;
+ 2ec:	10 92 62 00 	sts	0x0062, r1
+			state_turn = 1;
+ 2f0:	81 e0       	ldi	r24, 0x01	; 1
+ 2f2:	80 93 61 00 	sts	0x0061, r24
+			return ;
+ 2f6:	08 95       	ret
+		}
+		// set period
+		timer_setInterval(256);
+ 2f8:	80 e0       	ldi	r24, 0x00	; 0
+ 2fa:	91 e0       	ldi	r25, 0x01	; 1
+ 2fc:	0e 94 c5 01 	call	0x38a	; 0x38a <timer_setInterval>
+ 300:	08 95       	ret
+
+00000302 <main>:
+}
+
+int main(void)
+{
+	// led definition
+	DIO_setPinDirection(GPIOB, PIN0, OUTPUT);
+ 302:	41 e0       	ldi	r20, 0x01	; 1
+ 304:	60 e0       	ldi	r22, 0x00	; 0
+ 306:	81 e0       	ldi	r24, 0x01	; 1
+ 308:	0e 94 49 00 	call	0x92	; 0x92 <DIO_setPinDirection>
+	DIO_setPinValue(GPIOB, PIN0, HIGH);
+ 30c:	41 e0       	ldi	r20, 0x01	; 1
+ 30e:	60 e0       	ldi	r22, 0x00	; 0
+ 310:	81 e0       	ldi	r24, 0x01	; 1
+ 312:	0e 94 a9 00 	call	0x152	; 0x152 <DIO_setPinValue>
+	
+	global_int_enable();
+ 316:	0e 94 9e 01 	call	0x33c	; 0x33c <global_int_enable>
+	timer_enableInterrupt(OVERFLOW_FLAG);
+ 31a:	80 e0       	ldi	r24, 0x00	; 0
+ 31c:	0e 94 ab 01 	call	0x356	; 0x356 <timer_enableInterrupt>
+	
+	// timer configurations
+	timer_init(); // timer mode is nomal
+ 320:	0e 94 a7 01 	call	0x34e	; 0x34e <timer_init>
+	timer_setInterval(256); // 266.24 ms
+ 324:	80 e0       	ldi	r24, 0x00	; 0
+ 326:	91 e0       	ldi	r25, 0x01	; 1
+ 328:	0e 94 c5 01 	call	0x38a	; 0x38a <timer_setInterval>
+	timer_setCallback(toggle_led);
+ 32c:	8c e3       	ldi	r24, 0x3C	; 60
+ 32e:	91 e0       	ldi	r25, 0x01	; 1
+ 330:	0e 94 a2 01 	call	0x344	; 0x344 <timer_setCallback>
+	timer_start(TIMER0); // timer clk = tclk/1024 (timer tick time = 1.04 ms)
+ 334:	80 e0       	ldi	r24, 0x00	; 0
+ 336:	0e 94 bd 01 	call	0x37a	; 0x37a <timer_start>
+ 33a:	ff cf       	rjmp	.-2      	; 0x33a <main+0x38>
+
+0000033c <global_int_enable>:
+
+
+void global_int_enable(void)
+{
+	#define SREG  *((volatile uint8_t*)(0x5F))
+	SET_BIT(SREG, 7);
+ 33c:	8f b7       	in	r24, 0x3f	; 63
+ 33e:	80 68       	ori	r24, 0x80	; 128
+ 340:	8f bf       	out	0x3f, r24	; 63
+ 342:	08 95       	ret
+
+00000344 <timer_setCallback>:
+}
+
+
+void timer_setCallback(void(*ptr_to_func)(void))
+{
+	overflow_callback = ptr_to_func;
+ 344:	90 93 65 00 	sts	0x0065, r25
+ 348:	80 93 64 00 	sts	0x0064, r24
+ 34c:	08 95       	ret
+
+0000034e <timer_init>:
+
+sint8_t timer_init(void)
+{
+	// set mode
+	#if TIMER_MODE == NORMAL
+	TCCR0 |= 0x00;
+ 34e:	83 b7       	in	r24, 0x33	; 51
+ 350:	83 bf       	out	0x33, r24	; 51
+	#endif
+	return 1;
+}
+ 352:	81 e0       	ldi	r24, 0x01	; 1
+ 354:	08 95       	ret
+
+00000356 <timer_enableInterrupt>:
+
+#if KEY == UNLOCKED // ********************************
+sint8_t timer_enableInterrupt(uint8_t flag)
+{
+	#if TIMER_ID == TIMER0
+	if (flag == OVERFLOW_FLAG || flag == COMPARE_FLAG )
+ 356:	82 30       	cpi	r24, 0x02	; 2
+ 358:	70 f4       	brcc	.+28     	; 0x376 <timer_enableInterrupt+0x20>
+	{
+		TIMSK |= (1<<flag);
+ 35a:	49 b7       	in	r20, 0x39	; 57
+ 35c:	21 e0       	ldi	r18, 0x01	; 1
+ 35e:	30 e0       	ldi	r19, 0x00	; 0
+ 360:	b9 01       	movw	r22, r18
+ 362:	02 c0       	rjmp	.+4      	; 0x368 <timer_enableInterrupt+0x12>
+ 364:	66 0f       	add	r22, r22
+ 366:	77 1f       	adc	r23, r23
+ 368:	8a 95       	dec	r24
+ 36a:	e2 f7       	brpl	.-8      	; 0x364 <timer_enableInterrupt+0xe>
+ 36c:	cb 01       	movw	r24, r22
+ 36e:	84 2b       	or	r24, r20
+ 370:	89 bf       	out	0x39, r24	; 57
+		return 1;
+ 372:	81 e0       	ldi	r24, 0x01	; 1
+ 374:	08 95       	ret
+	}
+	return -1; // Invalid input
+ 376:	8f ef       	ldi	r24, 0xFF	; 255
+	#endif
+}
+ 378:	08 95       	ret
+
+0000037a <timer_start>:
+
+
+sint8_t timer_start(uint8_t timerID)
+{
+	// set clk source and start timer operation
+	TCCR0 &= ~(0x07); // clear prescaler bits 
+ 37a:	83 b7       	in	r24, 0x33	; 51
+ 37c:	88 7f       	andi	r24, 0xF8	; 248
+ 37e:	83 bf       	out	0x33, r24	; 51
+	TCCR0 |= CLK_SOURCE; // set the value to register
+ 380:	83 b7       	in	r24, 0x33	; 51
+ 382:	85 60       	ori	r24, 0x05	; 5
+ 384:	83 bf       	out	0x33, r24	; 51
+	return 1;
+}
+ 386:	81 e0       	ldi	r24, 0x01	; 1
+ 388:	08 95       	ret
+
+0000038a <timer_setInterval>:
+
+
+sint8_t timer_setInterval(uint16_t num_of_counts)
+{
+	TCNT0 = 256-num_of_counts;
+ 38a:	81 95       	neg	r24
+ 38c:	82 bf       	out	0x32, r24	; 50
+	return 1;
+}
+ 38e:	81 e0       	ldi	r24, 0x01	; 1
+ 390:	08 95       	ret
+
+00000392 <__vector_11>:
+	return 1; // No Errors
+}
+
+
+void __vector_11(void) 
+{
+ 392:	1f 92       	push	r1
+ 394:	0f 92       	push	r0
+ 396:	0f b6       	in	r0, 0x3f	; 63
+ 398:	0f 92       	push	r0
+ 39a:	11 24       	eor	r1, r1
+ 39c:	2f 93       	push	r18
+ 39e:	3f 93       	push	r19
+ 3a0:	4f 93       	push	r20
+ 3a2:	5f 93       	push	r21
+ 3a4:	6f 93       	push	r22
+ 3a6:	7f 93       	push	r23
+ 3a8:	8f 93       	push	r24
+ 3aa:	9f 93       	push	r25
+ 3ac:	af 93       	push	r26
+ 3ae:	bf 93       	push	r27
+ 3b0:	ef 93       	push	r30
+ 3b2:	ff 93       	push	r31
+	if (overflow_callback != 0)
+ 3b4:	80 91 64 00 	lds	r24, 0x0064
+ 3b8:	90 91 65 00 	lds	r25, 0x0065
+ 3bc:	89 2b       	or	r24, r25
+ 3be:	29 f0       	breq	.+10     	; 0x3ca <__vector_11+0x38>
+	{
+		//TCNT0 = 256-145; // set the value again
+		overflow_callback();
+ 3c0:	e0 91 64 00 	lds	r30, 0x0064
+ 3c4:	f0 91 65 00 	lds	r31, 0x0065
+ 3c8:	09 95       	icall
+	}
+}
+ 3ca:	ff 91       	pop	r31
+ 3cc:	ef 91       	pop	r30
+ 3ce:	bf 91       	pop	r27
+ 3d0:	af 91       	pop	r26
+ 3d2:	9f 91       	pop	r25
+ 3d4:	8f 91       	pop	r24
+ 3d6:	7f 91       	pop	r23
+ 3d8:	6f 91       	pop	r22
+ 3da:	5f 91       	pop	r21
+ 3dc:	4f 91       	pop	r20
+ 3de:	3f 91       	pop	r19
+ 3e0:	2f 91       	pop	r18
+ 3e2:	0f 90       	pop	r0
+ 3e4:	0f be       	out	0x3f, r0	; 63
+ 3e6:	0f 90       	pop	r0
+ 3e8:	1f 90       	pop	r1
+ 3ea:	18 95       	reti
+
+000003ec <_exit>:
+ 3ec:	f8 94       	cli
+
+000003ee <__stop_program>:
+ 3ee:	ff cf       	rjmp	.-2      	; 0x3ee <__stop_program>
